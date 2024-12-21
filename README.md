@@ -7,7 +7,7 @@ Mostly inspired by time here at CMU.
 ## Graph
 - DFS (recursive, iterative)
 - BFS 
-- Knuth's Topological Sort
+- Kahn's Topological Sort
 - Dijkstra's (TSP)
 - Bellman-Ford (TSP)
 - Johnson's (TSP)
