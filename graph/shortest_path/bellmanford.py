@@ -5,6 +5,8 @@ sys.path.append("..")
 
 from graph import Graph
 
+# complexity is O(VE)
+
 def bellman_ford(adjlist, weights, src):
     # set up the distance matrix
     vertices = list(adjlist.keys())
@@ -12,7 +14,7 @@ def bellman_ford(adjlist, weights, src):
     for vertex in vertices:
         distance_matrix[vertex] = float('inf')
     distance_matrix[src] = 0
-    # relaxtion phase (V - 1) times, since V would create a cycle.
+    # relaxtion phase V times, check if last iteration creates a cycle.
     for i in range(len(vertices)):
         # go through every edge
         for edge, weight in weights.items():
