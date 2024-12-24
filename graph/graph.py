@@ -16,6 +16,8 @@ class Graph:
         return self.weights[(src, dst)]
     
     def update_weight(self, src, dst, weight):
+        if (src,dst) not in self.weights:
+            raise KeyError(f"The edge {src, dst} not found.")
         self.weights[(src, dst)] = weight
     
     def get_neighbors(self, vertex):
@@ -63,9 +65,11 @@ class Graph:
         # delete from adjacency list
         del self.adjlist[vertex]
         for _, neighbors in self.adjlist.items():
-            neighbors.remove(vertex)
+            if vertex in neighbors:
+                neighbors.remove(vertex)
         # delete from edge weights
-        for src, dst in self.weights.keys():
+        keys = list(self.weights.keys())
+        for src, dst in keys:
             if src == vertex or dst == vertex:
                 del self.weights[(src, dst)]
         # delete from vertex list
