@@ -8,20 +8,20 @@ import heapq
 
 # complexity is O((v + e)log v)
 
-def dijkstras(adjlist, weights, num_vertices, src):
+def dijkstras(graph: Graph, src):
+    num_vertices = len(graph.get_vertices())
     pq = []
     visited = set()
     distance_matrix = dict()
     # (distance, vertex) tuples
     heapq.heappush(pq, (0, src))
     while(pq and len(distance_matrix) < num_vertices):
-        print(pq)
         dist, curr = heapq.heappop(pq)
         visited.add(curr)
         distance_matrix[curr] = dist
-        for neighbor in adjlist[curr]:
+        for neighbor in graph.get_neighbors(curr):
             if neighbor not in visited:
-                heapq.heappush(pq, (dist + weights[(curr, neighbor)], neighbor))
+                heapq.heappush(pq, (dist + graph.get_weight(curr, neighbor), neighbor))
     return distance_matrix
 
 if __name__ == "__main__":
@@ -38,8 +38,7 @@ if __name__ == "__main__":
     graph.add_directed_edge(2, 7, 16)
     graph.add_directed_edge(2, 8, 5)
     graph.add_directed_edge(8, 7, 10)
-    matrix = dijkstras(graph.adjlist, graph.weights, 9, 0)
-    print(matrix)
+    matrix = dijkstras(graph, 0)
     assert(matrix[1] == 5)
     assert(matrix[2] == 14)
     assert(matrix[6] == 30)

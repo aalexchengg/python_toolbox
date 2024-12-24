@@ -4,13 +4,19 @@ class Graph:
     def __init__(self):
         self.adjlist = defaultdict(lambda: list())
         self.weights = dict()
-        self.vertices = dict() 
+        self.vertices = defaultdict(lambda: 0) 
 
     def get_vertices(self):
         return list(self.vertices.keys())
     
+    def get_weights(self):
+        return self.weights
+    
     def get_weight(self, src, dst):
         return self.weights[(src, dst)]
+    
+    def update_weight(self, src, dst, weight):
+        self.weights[(src, dst)] = weight
     
     def get_neighbors(self, vertex):
         return self.adjlist[vertex]
