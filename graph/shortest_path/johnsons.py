@@ -20,13 +20,9 @@ def johnsons(graph: Graph):
     graph.remove_vertex(source)
     # reweight all the edges such that 
     # weight(u,v) = weight(u,v) + matrix[u] - matrix[v]
-    print(matrix)
-    print(graph.get_weights())
     for (u,v) in graph.get_weights().keys():
-        print(f"u: {u} v: {v}")
         new_weight = graph.get_weight(u, v) + matrix[u] - matrix[v]
         graph.update_weight(u, v, new_weight)
-    print(graph.get_weights())
     # now that all the weights are positive, use Dijkstra's to find shortest path
     result = dict()
     for vertex in vertices:
