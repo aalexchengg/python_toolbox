@@ -1,11 +1,24 @@
-from search_test import test_first, test_last
+from search_test import test_first, test_last, test_found
+
+def binarysearch(arr, target):
+    lo = 0
+    hi = len(arr)
+    while (lo < hi):
+        mid = lo + (hi - lo)//2
+        if (arr[mid] == target):
+            return mid
+        elif (arr[mid] < target):
+            lo = mid + 1
+        else: # arr[mid] < target
+            hi = mid 
+    if lo < len(arr) and arr[lo] == target:
+        return lo
+    return -1
 
 # returns first occurence in the array
 def binarysearch_first(arr, target):
     lo = 0
     hi = len(arr)
-    if (arr[lo]) == target:
-        return lo
     while (lo < hi):
         mid = lo + (hi - lo)//2
         if arr[mid] >= target:
@@ -39,5 +52,6 @@ def binarysearch_last(arr, target):
     return -1
 
 if __name__ == "__main__":
+    test_found(binarysearch)
     test_first(binarysearch_first)
     test_last(binarysearch_last)
